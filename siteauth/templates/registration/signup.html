@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}SignUp{%endblock%}
+{% load crispy_forms_tags %}
+
+{% block body%}
+<div class="container" id="bodystart">
+    <div class="d-flex justify-content-center"><h2>SignUp</h2></div>
+    <div class="row">
+        <div class="col-12 col-md-8 offset-md-2">
+            <form method="post">
+                {{form|crispy}}
+                {% csrf_token %}
+                <input type="submit" value="Signup" class="btn btn-success">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+    $('#hint_id_username').after(`<p id="error_username" class="invalid-feedback"></p>`);
+    $('#id_username').on('change keyup', function(){
+        var username = $(this).val();
+        if (username.length < 3){
+            $('#id_username').addClass('is-invalid');
+            $('#error_username').html(`<strong>Username must be greater than 3 characters</strong>`);
+        }else{
+            $.ajax({
+                url: '{% url 'auth:username_validate'%}',
+                data: {'username': username},
+                success: function(data){
+                    if (data.error) {
+                        $('#id_username').addClass('is-invalid');
+                        $('#error_username').html(`<strong>${data.error}</strong>`);
+                    } else {
+                        $('#error_username').html('');
+                        $('#id_username').addClass('is-valid');
+                        $('#id_username').removeClass('is-invalid');
+                    }
+                }
+            })
+        }
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %} Reports {% endblock %}
+{% block body %}
+    <div id="bodystart">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-center">
+                        <h3>Search Reports</h3>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="text-right">
+                        <a href="doctor/create/" class="btn btn-info"><span class="fa fa-plus fa-lg"></span></a>
+                        <a href="{% url 'doctor_reports' %}" class="btn btn-info ml-3">Uploaded Reports</a>
+                    </div>
+                </div>
+            </div>
+            <form>
+                <div class="row h-100 m-5">
+                    <div class="col-6 offset-md-2">
+                        <input type="text" name="patient" class="form-control">
+                    </div>
+                    <div class="col-3">
+                        <button type="submit" class="btn btn-success">Search</button>
+                    </div>
+                </div>
+            </form>
+            {% if reports%}
+            <table class="table table-hover mt-3">
+                <thead class="thead-light">
+                    <tr>
+                        <th>S.No</th>
+                        <th>Patient</th>
+                        <th>Description</th>
+                        <th>Report</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for report in reports %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{report.patient}}</td>
+                        <td>{{report.description}}</td>
+                        <td><a href="http://{{ request.META.HTTP_HOST }}/files/{{report.report}}">{{report.report|cut:"documents/"}}</a></td>
+                        <td>{{report.created_at}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <h4>No reports found</h4>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Create Report{% endblock %}
+
+{% block body%}
+<div id="bodystart">
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data">
+            {{form|crispy}}
+            {% csrf_token %}
+            <input type="submit" class="btn btn-block btn-primary" value="Create Report">
+        </form>
+    </div>
+</div>
+{% endblock %}

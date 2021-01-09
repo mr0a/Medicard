@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body background="{% static 'medibackground.jpg' %}">
+    <nav class="navbar navbar-light bg-info navbar-expand-sm fixed-top">
+        <div class="container">
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a href="/" class="navbar-brand mr-auto">MediCard</a>
+            <div class="navbar-collapse collapse" id="Navbar">
+                <ul class="navbar-nav ml-auto">
+                    {% url 'auth:login' as login %}
+                    {% url 'auth:signup' as signup %}
+                    
+                    <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item"><a href="/reports" class="nav-link">Reports</a></li>
+                    <li class="nav-item"><a href="/profile" class="nav-link">{{request.user|title}}</a></li>
+                    <li class="nav-item"><a href="{% url 'auth:logout' %}" class="nav-link">Logout</a></li>
+                    {% else %}
+                    <li class="nav-item"><a href="{% url 'auth:login' %}" class="nav-link {% if request.path == login %}active{% endif %}">Login</a></li>
+                    <li class="nav-item"><a href="{% url 'auth:signup' %}" class="nav-link {% if request.path == signup %}active{% endif %}">SignUp</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% block body%}
+    {% endblock %}
+</body>
+<script src="{% static 'jquery.min.js'%}"></script>
+<script src="{% static 'bootstrap.bundle.min.js'%}"></script>
+{% block script %}
+{% endblock %}
+</html>

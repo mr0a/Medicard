@@ -1,0 +1,71 @@
+#bodystart {
+    margin-top: 100px;
+}
+
+.navbar{
+    color: orange;
+    background-color: antiquewhite;
+}
+
+.card-body {
+    background-color: aliceblue;
+}
+
+body{
+    background: url(/static/medibackground.jpg) no-repeat center center fixed;
+    background-size: cover;
+}
+
+*{
+    margin:0;
+    padding:0;
+}
+.header
+{
+    max-height:100vh;
+}
+.navbar-style
+{
+    box-shadow:0 5px 10px #efefef;
+    text-transform:uppercase;
+}
+
+.big-text
+{
+    font-size:64px;
+    margin:20px 0;
+    color:purple;
+    font-family: cursive;
+}
+.small-text
+{
+    font-size:30px;
+    color:darkolivegreen;
+    font-family: cursive;
+}
+a.btn
+{
+    margin:30px 10px;
+    width:150px;
+    padding:10px;
+    border-radius: 20px;
+}
+a.btn-first
+{
+    background-color: darkorange;
+    color:white;
+}
+a.btn-second
+{
+    background: transparent;
+    border:1px solid darkorange;
+    color:black;
+}
+a.btn:hover
+{
+    background: darkorange;
+    border:none;
+    color: white;
+    box-shadow:5px 5px 10px #999;
+    transition:0.3s;
+}

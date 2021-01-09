@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %} Reports {% endblock %}
+{% block body %}
+    <div id="bodystart">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-center">
+                        <h3>Reports</h3>
+                    </div>
+                </div>
+            </div>
+            {% if reports%}
+            <table class="table table-hover mt-3">
+                <thead class="thead-light">
+                    <tr>
+                        <th>S.No</th>
+                        <th>Patient</th>
+                        <th>Description</th>
+                        <th>Report</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for report in reports %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{report.patient}}</td>
+                        <td>{{report.description}}</td>
+                        <td><a href="http://{{ request.META.HTTP_HOST }}/files/{{report.report}}">{{report.report|cut:"documents/"}}</a></td>
+                        <td>{{report.created_at}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <h4>No reports found</h4>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
